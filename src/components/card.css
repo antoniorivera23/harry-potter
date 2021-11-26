@@ -12,9 +12,7 @@
     font-size: 1rem;
   }
   
-  .overflow {
-    overflow: hidden;
-  }
+  
   
   .card-img-top {
     transform: scale(1);
@@ -26,15 +24,15 @@
   }
 
 h1{
-  text-align: center;
-  color: white;
+  /* text-align: center; */
+  /* color: white; */
 }
 
-h2{
+/* div{
   text-align: center;
-  color: white;
+   color: white; 
   size: 38px;
-}
+} */
 
 .button{
   position: absolute;
@@ -50,4 +48,12 @@ h2{
   background-color: #c10059;
   color: white;
   margin-top: 2rem;
+}
+
+.wrapper {
+  display: flex;
+  
+  justify-content: space-between;
+  padding: 20px;
+  border-style: solid;
 }

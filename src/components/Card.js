@@ -1,10 +1,7 @@
 import React, {Fragment} from "react";
-// import AgregarPersonaje from '';
-
-
 
 import "./card.css";
-import "./hp-staff";
+
 
 function Card() {
 

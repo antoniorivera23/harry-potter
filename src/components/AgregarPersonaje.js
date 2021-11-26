@@ -1,17 +1,22 @@
 import React, {Fragment, useState} from 'react';
 
-    return ( 
+const AgregarPersonaje = ({crearPersonaje}) => {
 
-             
-     const[personaje, actualizarPersonaje]= useState({
+    //Crear State de personajes
+    const[personaje, actualizarPersonaje]= useState({
         nombre: '',
         cumpleaos: '',
         ojos:'',
         pelo:'',
-        sintomas:''
+        genero:'',
+        posicion:'',
     });
 
-       //Funcion que se ejecuta cada que el usuario escribe en un input
+    const [error, actualizarError] = useState(false)
+
+     
+
+    //Funcion que se ejecuta cada que el usuario escribe en un input
     const actualizarState = e =>{
         // console.log('escribiendo...');
         actualizarPersonaje({
@@ -19,8 +24,40 @@ import React, {Fragment, useState} from 'react';
             [e.target.name] : e.target.value
         })
     }
+
+    //Extraer los valores 
+    const { nombre, cumpleaos, ojos, pelo, genero, posicion} = personaje;
+
+    //Cuando el usuario presiona agregar personaje
+    const submitPersonaje = e =>{
+        e.preventDefault();
+
+        //Validar
+        if(nombre.trim() === '' || cumpleaos.trim() === '' || ojos.trim() === ''){
+            actualizarError(true);
+            return;
+        }
+
+        //Eliminar el mensaje previo
+        actualizarError(false);
+
+        //Crear la personaje
+        crearPersonaje(personaje);
+
+        //Reiniciar el form
+        actualizarPersonaje({
+           nombre: '',
+           cumpleaos: '',
+           ojos:'',
+           pelo:'',
+           genero:'',
+           posicion:'',    
+        })
+    }
+
+    return ( 
         <Fragment>
-            <h2>Agrega un Personaje</h2>
+            <h2>Agregar Personaje</h2>
 
             {error? <p className="alerta-error">Todos los campos son obligatorios</p> : null }
 
@@ -28,26 +65,29 @@ import React, {Fragment, useState} from 'react';
                 onSubmit={submitPersonaje}
             >
                 <label>NOMBRE</label>
+                <br />
                 <input
                     type="text"
                     name="nombre"
                     className="u-full-width"
-                    placeholder="Nombre Mascota"
                     onChange={actualizarState}
                     value={nombre}
                 />
-
+                <br /> <br />
+                
                 <label>CUMPLEAÑOS</label>
+                <br />
                 <input
                     type="text"
                     name="cumpleaos"
                     className="u-full-width"
-                    placeholder="Nombre Dueño de la mascota"
                     onChange={actualizarState}
-                    value={cunpleaños}
+                    value={cumpleaos}
                 />
+                <br /> <br/>
 
-                <r>COLOR DE OJOS</label>
+                <label>COLOR DE OJOS</label>
+                <br />
                 <input
                     type="text"
                     name="ojos"
@@ -55,8 +95,10 @@ import React, {Fragment, useState} from 'react';
                     onChange={actualizarState}
                     value={ojos}
                 />
+                <br /><br />
 
                 <label>COLOR DE PELO</label>
+                <br />
                 <input
                     type="text"
                     name="pelo"
@@ -64,23 +106,52 @@ import React, {Fragment, useState} from 'react';
                     onChange={actualizarState}
                     value={pelo}
                 />
+                <br /><br />
 
-              <option value="" disabled>
-                              GENERO
-                            </option>
-                            <option value="mujer">Mujer</option>
-                            <option value="hombre">Años</option>
-                          </select>
+                <label>GENERO</label>
+                <br />
+                <input
+                    type="radio"
+                    value="Mujer"
+                    name="genero"
+                    className="u-full-width"
+                    onChange={actualizarState}
+                    
+                /> Mujer &nbsp;
+                  <input
+                    type="radio"
+                    value="Hombre"
+                    name="genero"
+                    className="u-full-width"
+                    onChange={actualizarState}
+                    value={genero}
+                />Hombre
+                <br />
 
-                 <option value="" disabled>
-                              POSICION
-                            </option>
-                            <option value="estudiante">Estudiante</option>
-                            <option value="staff">Staff</option>
-                          </select>
+                <label>POSICION</label>
+                <br />
+               <input
+                    type="radio"
+                    value="estudiante"
+                    name="posicion"
+                    onChange={actualizarState}
+                    
+                />Estudiante &nbsp;
+
+                 <input
+                    type="radio"
+                    value="staff"
+                    name="posicion"
+                    className="u-full-width"
+                    onChange={actualizarState}
+                    value={posicion}
+                />Staff
+                <br/><br/>
+                
+
                <button
                     type="submit"
-                    className="u-full-width button-primary"
+                    className="center btn btn-secondary btn-lg"
                >GUARDAR</button>
                 
             </form>
